@@ -28,8 +28,8 @@ company: String,
 zip: Number
  */
 router.post('/create_client', function(req, res, next) {
-  if(!req.body.name || !req.body.phone || !req.body.email || !req.body.company || !req.body.zip){
-    Clients.find({email: req.body.email}, function(err, client){
+  //if(!req.body.name || !req.body.phone || !req.body.email || !req.body.company || !req.body.zip){
+    Clients.findOne({email: req.body.email}, function(err, client){
       if(err){
         res.send({
           state: 'failure',
@@ -66,14 +66,14 @@ router.post('/create_client', function(req, res, next) {
         })
       }
     })
-  }
-  else {
-    res.send({
-      state: 'failure',
-      message: 'Please fill all details',
-      data: req.body
-    }, 500);
-  }
+  // }
+  // else {
+  //   res.send({
+  //     state: 'failure',
+  //     message: 'Please fill all details',
+  //     data: req.body
+  //   }, 500);
+  // }
 
 });
 
