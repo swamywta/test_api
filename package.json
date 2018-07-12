@@ -18,5 +18,14 @@
     "mongoose": "^5.2.2",
     "morgan": "~1.9.0",
     "serve-favicon": "^2.5.0"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.3",
+    "grunt-bump": "^0.8.0",
+    "grunt-concurrent": "^2.3.1",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-uglify": "^3.3.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-nodemon": "^0.4.2"
   }
 }

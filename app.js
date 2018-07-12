@@ -7,8 +7,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var flash = require('connect-flash');
 var session = require('express-session');
-require('./models/clients');
-var clients = require('./routes/clients');
+require('./server/models/clients/clients');
+var clients = require('./server/routes/clients/clients');
 
 
 //var makeCall = celebrity.makeCall;
