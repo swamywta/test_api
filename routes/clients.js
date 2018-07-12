@@ -19,6 +19,23 @@ router.get('/get_clients', function(req, res, next) {
     }
   })
 });
+/* GET Specific Client. */
+router.get('/get_client_data/:client_id', function(req, res, next) {
+  Clients.findById({_id: req.params.client_id}, function(err, client){
+    if(err){
+      res.send({
+        state: 'failure',
+        data: err
+      }, 500);
+    }
+    else {
+      res.send({
+        state: 'success',
+        data: client
+      }, 200);
+    }
+  })
+});
 
 /* GET users listing.
 name: String,
@@ -28,7 +45,6 @@ company: String,
 zip: Number
  */
 router.post('/create_client', function(req, res, next) {
-  //if(!req.body.name || !req.body.phone || !req.body.email || !req.body.company || !req.body.zip){
     Clients.findOne({email: req.body.email}, function(err, client){
       if(err){
         res.send({
@@ -36,6 +52,7 @@ router.post('/create_client', function(req, res, next) {
           data: err
         }, 500);
       }
+      console.log(client);
       if(client) {
         res.send({
           state: 'failure',
@@ -66,14 +83,42 @@ router.post('/create_client', function(req, res, next) {
         })
       }
     })
-  // }
-  // else {
-  //   res.send({
-  //     state: 'failure',
-  //     message: 'Please fill all details',
-  //     data: req.body
-  //   }, 500);
-  // }
+
+});
+router.put('/edit_client', function(req, res, next) {
+    Clients.findById({_id: req.body._id}, function(err, client){
+      if(err){
+        res.send({
+          state: 'failure',
+          data: err
+        }, 500);
+      }
+      console.log(client);
+      if(client) {
+
+        client.name = req.body.name;
+        client.phone = req.body.phone;
+        client.email = req.body.email;
+        client.company = req.body.company;
+        client.zip = req.body.zip;
+        client.save(function(err, client){
+          if(err){
+            res.send({
+              state: 'failure',
+              data: err
+            }, 500);
+          }
+          else {
+              res.send({
+                state: 'success',
+                message: "Client saved successfully!",
+                data: client
+              }, 200);
+          }
+        })
+      }
+
+    })
 
 });
 
