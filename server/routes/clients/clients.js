@@ -37,6 +37,25 @@ router.get('/get_client_data/:client_id', function(req, res, next) {
   })
 });
 
+
+/* SEARCH CLIENTS */
+router.get('/search_clients', function(req, res, next) {  
+  Clients.find({$or: [{name: req.query.name}, {phone: req.query.phone}, {email: req.query.phone}, {company: req.query.company}, {zip: req.query.zip}]}, function(err, clients){
+    if(err){
+      res.send({
+        state: 'failure',
+        data: err
+      }, 500);
+    }
+    else {
+      res.send({
+        state: 'success',
+        data: clients
+      }, 200);
+    }
+  })
+});
+
 /* GET users listing.
 name: String,
 phone: String,
