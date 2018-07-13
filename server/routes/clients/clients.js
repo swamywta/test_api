@@ -39,7 +39,7 @@ router.get('/get_client_data/:client_id', function(req, res, next) {
 
 
 /* SEARCH CLIENTS */
-router.get('/search_clients', function(req, res, next) {  
+router.get('/search_clients', function(req, res, next) {
   Clients.find({$or: [{name: req.query.name}, {phone: req.query.phone}, {email: req.query.phone}, {company: req.query.company}, {zip: req.query.zip}]}, function(err, clients){
     if(err){
       res.send({
@@ -76,7 +76,7 @@ router.post('/create_client', function(req, res, next) {
         res.send({
           state: 'failure',
           message: "This email already exists!"
-        }, 500);
+        }, 201);
       }
       else {
         var client = new Clients();
